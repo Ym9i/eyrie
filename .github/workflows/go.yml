@@ -9,6 +9,10 @@ on:
   pull_request:
     branches: [ "master" ]
 
+env:
+  GITHUB_NAME: bob
+  GITHUB_EMAIL: bob@1bob.com
+
 jobs:
 
   build:
