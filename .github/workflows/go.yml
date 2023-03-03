@@ -10,8 +10,8 @@ on:
     branches: [ "master" ]
 
 env:
-  GITHUB_NAME: bob
-  GITHUB_EMAIL: bob@1bob.com
+  GITHUB_NAME: Bob
+  GITHUB_EMAIL: 971822071@qq.com
 
 jobs:
 
