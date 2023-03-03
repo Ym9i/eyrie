@@ -33,6 +33,8 @@ jobs:
 
     - name: Push new runs
       run: |
+          echo ${{ envs.TEST_S01 }}
+          echo ${{ env.TEST_S01 }}
           echo $(date) > readme.log.md
           git config --local user.email "${{ env.GITHUB_EMAIL }}"
           git config --local user.name "${{ env.GITHUB_NAME }}"
