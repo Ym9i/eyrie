@@ -19,6 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+      with:
+        ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        persist-credentials: true
 
     - name: Set up Go
       uses: actions/setup-go@v3
@@ -27,8 +30,6 @@ jobs:
 
     - name: Push new runs
       run: |
-          echo ${{ secrets.TOKEN_T }}
-          echo ${{ secrets.GITHUB_TOKEN }}
           echo $(date) > readme.log.md
           git config --local user.email "${{ env.GITHUB_EMAIL }}"
           git config --local user.name "${{ env.GITHUB_NAME }}"
@@ -37,5 +38,6 @@ jobs:
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
-        github_token: ${{ secrets.TOKEN_GITHUB }}
+        ssh: true
         branch: ${{ github.ref }}
+        # github_token: ${{ secrets.TOKEN_GITHUB }}
