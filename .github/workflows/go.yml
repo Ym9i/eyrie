@@ -4,8 +4,7 @@
 name: Go
 
 on:
-  schedule:
-  - cron:  '30 11,23 * * *'
+  workflow_dispatch:
 
 env:
   GITHUB_NAME: Bob
@@ -17,11 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-      with:
-        ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
-        persist-credentials: true
-
-
     - uses: manyuanrong/setup-ossutil@v2.0
       with:
         endpoint: ${{ vars.ALIYUN_OSS_ENDPOINT }}
@@ -45,6 +39,5 @@ jobs:
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
-        ssh: true
         branch: ${{ github.ref }}
-        # github_token: ${{ secrets.TOKEN_GITHUB }}
+        github_token: ${{ secrets.TOKEN_GITHUB }}
