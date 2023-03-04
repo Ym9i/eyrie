@@ -4,10 +4,8 @@
 name: Go
 
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+  schedule:
+  - cron:  '30 11,23 * * *'
 
 env:
   GITHUB_NAME: Bob
