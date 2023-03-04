@@ -23,6 +23,15 @@ jobs:
         ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
         persist-credentials: true
 
+
+    - uses: manyuanrong/setup-ossutil@v2.0
+      with:
+        endpoint: ${{ vars.ALIYUN_OSS_ENDPOINT }}
+        access-key-id: ${{ secrets.ALIYUN_ACCESS_KEY_ID }}
+        access-key-secret: ${{ secrets.ALIYUN_ACCESS_KEY_SECRET }}
+
+    - run: ossutil cp -rf readme.md ${{ vars.ALIYUN_OSS_PATH }}
+
     - name: Set up Go
       uses: actions/setup-go@v3
       with:
