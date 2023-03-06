@@ -26,11 +26,11 @@ jobs:
     - run: echo $(date)
     - name: Get pre MD5 
       id: get_md5_pre
-      run: echo "MD5_PRE=$(md5sum scripts/data.db | awk '{print $1}')" >> $GITHUB_OUTPUT
+      run: echo "MD5_PRE=$(md5sum readme.log.md | awk '{print $1}')" >> $GITHUB_OUTPUT
     - run: echo $(date) >> readme.log.md
     - name: Get after MD5 
       id: get_md5_after
-      run: echo "MD5_after=$(md5sum scripts/data.db | awk '{print $1}')" >> $GITHUB_OUTPUT
+      run: echo "MD5_after=$(md5sum readme.log.md | awk '{print $1}')" >> $GITHUB_OUTPUT
     - run: |
         echo ${{ steps.get_md5_pre.outputs.MD5_PRE }}
         echo ${{ steps.get_md5_after.outputs.MD5_AFTER }}
