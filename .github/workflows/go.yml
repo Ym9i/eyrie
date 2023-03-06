@@ -32,8 +32,8 @@ jobs:
       id: get_md5_after
       run: echo "MD5_after=$(md5sum scripts/data.db | awk '{print $1}')" >> $GITHUB_OUTPUT
     - run: |
-      echo ${{ steps.get_md5_pre.outputs.MD5_PRE }}
-      ${{ steps.get_md5_after.outputs.MD5_AFTER }}
+        echo ${{ steps.get_md5_pre.outputs.MD5_PRE }}
+        echo ${{ steps.get_md5_after.outputs.MD5_AFTER }}
     - name: test if condition
       if: ${{ steps.get_md5_pre.outputs.MD5_PRE }} != ${{ steps.get_md5_after.outputs.MD5_AFTER }}
       run: echo "not equal"
