@@ -35,10 +35,10 @@ jobs:
         echo ${{ steps.get_md5_pre.outputs.MD5_PRE }}
         echo ${{ steps.get_md5_after.outputs.MD5_AFTER }}
     - name: test if condition 1
-      if: ${{ steps.get_md5_pre.outputs.MD5_PRE }} != ${{ steps.get_md5_after.outputs.MD5_AFTER }}
+      if: ${{ steps.get_md5_pre.outputs.MD5_PRE != steps.get_md5_after.outputs.MD5_AFTER }}
       run: echo "not equal"
     - name: test if condition 2
-      if: ${{ steps.get_md5_pre.outputs.MD5_PRE }} == ${{ steps.get_md5_after.outputs.MD5_AFTER }}
+      if: ${{ steps.get_md5_pre.outputs.MD5_PRE == steps.get_md5_after.outputs.MD5_AFTER }}
       run: echo "equal"
     # - run: ossutil cp -rf readme.md ${{ vars.ALIYUN_OSS_PATH }}
 
@@ -47,15 +47,15 @@ jobs:
     #   with:
     #     go-version: 1.19
 
-    # - name: Push new runs
-    #   run: |
-    #       echo $(date) > readme.log.md
-    #       git config --local user.email "${{ env.GITHUB_EMAIL }}"
-    #       git config --local user.name "${{ env.GITHUB_NAME }}"
-    #       git add .
-    #       git commit -m 'update new runs' || echo "nothing to commit"
-    # - name: Push changes
-    #   uses: ad-m/github-push-action@master
-    #   with:
-    #     branch: ${{ github.ref }}
-    #     github_token: ${{ secrets.TOKEN_GITHUB }}
+    - name: Push new runs
+      run: |
+          echo $(date) > readme.log.md
+          git config --local user.email "${{ env.GITHUB_EMAIL }}"
+          git config --local user.name "${{ env.GITHUB_NAME }}"
+          git add .
+          git commit -m 'update new runs' || echo "nothing to commit"
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        branch: ${{ github.ref }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
